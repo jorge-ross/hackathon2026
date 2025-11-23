@@ -15,7 +15,7 @@ const EVENT_DATE = new Date("2026-09-05T10:00:00");
 const REGISTRATION_DEADLINE_MINUTES = 5;
 
 // endpoint para envío de datos
-const API_ENDPOINT = `${import.meta.env.VITE_API_URL}/api/register`;
+const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
 // temporizador
 const useCountdown = (minutes) => {
