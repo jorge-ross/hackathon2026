@@ -15,7 +15,7 @@ const EVENT_DATE = new Date("2026-09-05T10:00:00");
 const REGISTRATION_DEADLINE_MINUTES = 5;
 
 // endpoint para envío de datos
-const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+const API_ENDPOINT = "https://hackathon2026-production.up.railway.app/api/register";
 
 // temporizador
 const useCountdown = (minutes) => {
@@ -475,7 +475,7 @@ const Footer = () => (
   <footer className="bg-black py-12 flex-items-center justify-center">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <p className="text-center text-sm text-gray-50">
-        &copy; 2026 {EVENT_NAME}. Casa Bengala.
+        &copy; 2026 {EVENT_NAME}. Jorge Rosano.
       </p>
     </div>
   </footer>
