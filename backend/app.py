@@ -73,7 +73,7 @@ def register_user():
 
     # Verificar si el email ya existe
     try:
-        check_query = "SELECT id FROM registrations WHERE email = %s"
+        check_query = "SELECT id FROM hackathondb WHERE email = %s"
         cursor.execute(check_query, (email,))
         if cursor.fetchone():
             conn.close()
@@ -88,7 +88,7 @@ def register_user():
     # Insertar el nuevo registro
     try:
         insert_query = """
-            INSERT INTO registrations (name, email, message) 
+            INSERT INTO hackathondb (name, email, message) 
             VALUES (%s, %s, %s)
         """
         cursor.execute(insert_query, (name, email, message))
@@ -124,14 +124,14 @@ def get_registrations():
     cursor = conn.cursor()
     cursor.execute("""
         SELECT name, email, message, created_at 
-        FROM registrations
+        FROM hackathondb
         ORDER BY created_at DESC
     """)
     data = cursor.fetchall()
     
     cursor.close()
     conn.close()
-    return {"registrations": data}, 200
+    return {"hackathondb": data}, 200
 
 if __name__ == '__main__':
     import os
