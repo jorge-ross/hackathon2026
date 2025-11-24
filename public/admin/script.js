@@ -1,5 +1,5 @@
 const API_URL =
-  "https://evento-inovacion-casa-bengala-production.up.railway.app/api/registrations";
+  "https://hackathon2026-production.up.railway.app/api/registrations";
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
