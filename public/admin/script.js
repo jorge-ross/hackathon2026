@@ -19,7 +19,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     }
 
     const data = await res.json();
-    showTable(data.registrations);
+    showTable(data.hackathondb);
     localStorage.setItem("auth_key", key);
   } catch (err) {
     error.textContent = "Error al conectar con el servidor.";
