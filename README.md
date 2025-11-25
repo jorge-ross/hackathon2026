@@ -1,16 +1,171 @@
-# React + Vite
+# Hackathon Prometeo 2026 – Registration System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack web application built for managing registrations for Hackathon Prometeo 2026.
+The system allows users to register through a public form and provides an admin panel protected by an authorization token to retrieve all submissions.
 
-Currently, two official plugins are available:
+## 📌 Features
+### Frontend
+* Public registration form with validation
+* Responsive UI
+* Error handling and success messages
+* Admin dashboard for viewing registrations
+* Admin authentication using a secure token
+* Deployed on **Vercel**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Backend
+* REST API built with **Flask**
+* Database **CRUD** operations using **MySQL** (Railway Managed)
+* CORS enabled
+* Email validation using **regex**
+* Protected admin endpoint using server-side token
+* Deployed on **Railway**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📁 Project Structure
 
-## Expanding the ESLint configuration
+### Frontend
+```
+/
+  ├─ public/
+  ├─ src/
+  |  ├─ pages/
+  |  |  └─ LandingPage.jsx
+  |  └─ ... (App.jsx, main.jsx, assets, etc.)
+  ├─ index.html
+  └─ package.json
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+ ```
+/backend
+  ├─ app.py
+  └─ requirements.txt
+```
+
+---
+
+## 🔧 Technologies Used
+
+### Frontend
+* **React**
+* **HTML5**
+* **CSS3**
+* **JavaScript**
+
+### Backend
+* **Python 3**
+* **Flask**
+* **PyMySQL**
+* **Regex**
+* **Railway Hosting**
+
+### Database
+* **MySQL** (Railway Managed)
+
+---
+
+## 🔑 Environment Variables
+
+The backend requires the following environment variables (configured on Railway):
+
+| Variable | Description |
+| :--- | :--- |
+| `DATABASE_URL` | MySQL connection provided by Railway |
+| `AUTH_TOKEN` | Secret admin token for accessing `/api/registrations` |
+| `PORT` | 5000
+
+> **Example (Do not commit into code):**
+>
+> ```bash
+> DATABASE_URL = mysql://user:password@host:port/database
+> AUTH_TOKEN = secret-token
+> PORT = 5000
+> ```
+>
+> ---
+
+## 📡 API Endpoints
+
+### `POST /api/register`
+Registers a new participant.
+
+**Request Body (JSON)**
+```json
+{
+  "name": "John Doe",
+  "email": "john@mail.com",
+  "message": "Looking forward to it!"
+}
+```
+
+**Responses**
+| Status | Description |
+| :--- | :--- |
+| 200 | Registration successful |
+| 400 | Missing or invalid fields |
+| 409 | Email already registered |
+| 500 | Database or server error |
+
+### `GET /api/registrations?key=AUTH_TOKEN`
+Returns all registrations.
+
+> This endpoint is protected and only accessible with the correct token.
+
+**Response Example**
+```json
+{
+  "hackathondb": [
+    {
+      "name": "Jane Doe",
+      "email": "jane@mail.com",
+      "message": "Excited!",
+      "created_at": "2025-11-10 21:47:15"
+    }
+  ]
+}
+```
+## 🗄 Database Schema
+
+```sql
+CREATE TABLE hackathondb (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+---
+
+## 🌐 Deployments
+
+### Frontend
+* **Vercel**
+
+### Backend
+* **Railway**
+
+---
+
+## ✔️ Admin Panel
+
+After deployment, access the admin dashboard via:
+
+https://frontend-url.vercel.app/admin/admin-panel.html
+
+Enter secret **Admin Token** to view the registrations.
+
+---
+
+## 🛡 Security Notes
+
+* API keys and DB credentials are never stored on the frontend.
+* Admin token is stored on the backend and compared on every request.
+* Email format is validated with a strict regex.
+* The app includes basic hardening to avoid duplicate entries and malformed requests.
+
+---
+
+
