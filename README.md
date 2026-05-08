@@ -153,7 +153,7 @@ CREATE TABLE hackathondb (
 
 After deployment, access the admin dashboard via:
 
-https://frontend-url.vercel.app/admin/admin-panel.html
+https://hackathon-prometeo-delta.vercel.app/admin/admin-panel.html
 
 Enter secret **Admin Token** to view the registrations.
 
